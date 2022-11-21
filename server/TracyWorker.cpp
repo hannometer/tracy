@@ -2690,6 +2690,9 @@ const SourceLocation& Worker::GetSourceLocation( int16_t srcloc ) const
     else
     {
         const auto it = m_data.sourceLocation.find( m_data.sourceLocationExpand[srcloc] );
+        if( it == m_data.sourceLocation.end() && m_data.sourceLocationPayload.size() > 0 ) {
+            return *m_data.sourceLocationPayload[0];
+        }
         assert( it != m_data.sourceLocation.end() );
         return it->second;
     }
